@@ -28,19 +28,19 @@ module.exports = {
             trustScore -= 0.5;
 
         if ((user.createdTimestamp + (86400000 * 3)) > Date.now())                                          //was user created in the last 3 days?
-            trustScore -= 0.3;
+            trustScore -= 0.25;
 
         if (user.avatar == null)                                                                            //does the user have an avatar?
-            trustScore -= 0.2;
+            trustScore -= 0.3;
 
-        if (member.presence.status.includes("http"))                                                        //link in status?
+        if (member.presence != null && member.presence.status.includes("http"))                                                        //link in status?
             trustScore -= 0.1;
 
         if (user.username.replace(/\D/g, "") > 2500)                                                        //does the users name contain alot of numbers (that are not a year)
             trustScore -= 0.1;
 
         if (member.presence == null || member.presence.status == "offline")                                 //is user offline? only minor trust-impact
-            trustScore -= 0.05;
+            trustScore -= 0.1;
 
         if (user.username.includes(" "))                                                                    //most legit accounts have names without spaces while generated accounts often do.
             trustScore -= 0.05;                                                                             //but its only a minor trust-impact
